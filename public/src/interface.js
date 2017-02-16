@@ -1,16 +1,32 @@
-
+var headlineArray = [];
 
 function updateHeadlines(){
   for (var i=0; i<headlineArray.length; i++){
-    var newsId = "<li class=note id=news-" + i + ">";
-    var title = headlineArray[i].webTitle;
-    var content = newsId + title + "</li>"
-    document.getElementById('headlines').innerHTML += content;
+    {
+      var newsId = "<li class=note id=news-" + i + ">";
+      var title = headlineArray[i].webTitle;
+      writeHeadline(newsId, title)
+    }
   }
 }
 
+function writeHeadline(newsId, title){
+  content = newsId + title + "</li>"
+  createHeadlines(content, scriptCaller(element));
+  return content;
+}
+
+function scriptCaller(element){
+  return element;
+}
+
+function createHeadlines(content, target=scriptCaller(element)){
+   console.log(document.getElementById(target))
+     document.getElementById(target).innerHTML += content;
+ }
+
 function readGuardian(articles=5){
-  var headlineArray = [];
+
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all');
   xhr.onload = function() {
@@ -19,8 +35,8 @@ function readGuardian(articles=5){
           guardianObject = JSON.parse(xhr.responseText).response.results[i];
           headlineArray.push(guardianObject);
         }
-        // updateHeadlines();
-        return headlineArray
+        updateHeadlines();
+      //  return headlineArray
       }
       else {
           alert('Request failed.  Returned status of ' + xhr.status);
@@ -28,5 +44,3 @@ function readGuardian(articles=5){
   };
   xhr.send();
 }
-
-readGuardian();
