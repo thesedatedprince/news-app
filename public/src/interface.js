@@ -6,8 +6,6 @@ function readGuardian(articles=5){
       if (xhr.status === 200) {
         for (var i=0; i<=articles; i++){
           guardianObject = JSON.parse(xhr.responseText).response.results[i];
-          document.write("<b>"+guardianObject.webTitle+"</b>");
-          document.write(guardianObject.fields.body.substring(0,100)+"...<br><br>");
         }
       }
       else {
