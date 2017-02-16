@@ -1,3 +1,14 @@
+var headlineArray = [];
+
+function updateHeadlines(){
+  for (var i=0; i<headlineArray.length; i++){
+    console.log(headlineArray);
+    var title = headlineArray[i].webTitle;
+    document.getElementById('headlines').innerHTML += title;
+  }
+}
+
+
 
 function readGuardian(articles=5){
   var xhr = new XMLHttpRequest();
@@ -6,9 +17,9 @@ function readGuardian(articles=5){
       if (xhr.status === 200) {
         for (var i=0; i<=articles; i++){
           guardianObject = JSON.parse(xhr.responseText).response.results[i];
-          document.write("<b>"+guardianObject.webTitle+"</b>");
-          document.write(guardianObject.fields.body.substring(0,100)+"...<br><br>");
+          headlineArray.push(guardianObject);
         }
+        updateHeadlines();
       }
       else {
           alert('Request failed.  Returned status of ' + xhr.status);
@@ -17,4 +28,4 @@ function readGuardian(articles=5){
   xhr.send();
 }
 
-readGuardian(5);
+readGuardian();
