@@ -1,3 +1,14 @@
+var headlineArray = [];
+
+function updateHeadlines(){
+  for (var i=0; i<headlineArray.length; i++){
+    console.log(headlineArray);
+    var newsId = "<li class=note id=news-" + i + ">";
+    var title = headlineArray[i].webTitle;
+    var content = newsId + title + "</li>"
+    document.getElementById('headlines').innerHTML += content;
+  }
+}
 
 function readGuardian(articles=5){
   var xhr = new XMLHttpRequest();
@@ -6,7 +17,9 @@ function readGuardian(articles=5){
       if (xhr.status === 200) {
         for (var i=0; i<=articles; i++){
           guardianObject = JSON.parse(xhr.responseText).response.results[i];
+          headlineArray.push(guardianObject);
         }
+        updateHeadlines();
       }
       else {
           alert('Request failed.  Returned status of ' + xhr.status);
@@ -15,4 +28,4 @@ function readGuardian(articles=5){
   xhr.send();
 }
 
-readGuardian(5);
+readGuardian();
