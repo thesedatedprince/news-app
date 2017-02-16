@@ -19,6 +19,6 @@ describe("guardianApi", function(){
   it("it is able to return a news article using API", function(){
     guardianApi("http://localhost:8080/sample_data.json");
     // this is a messy test and needs refactoring
-    expect(newsItems()[3].webTitle).toContain("Giggs and Neville skyscrapers 'threaten Manchester's heritage'");
+    expect(results()[3].webTitle).toContain("Giggs and Neville skyscrapers 'threaten Manchester's heritage'");
   });
 });

@@ -2,7 +2,7 @@
 
 (function(exports) {
 
-    var newsArray = [];
+    var objArray = [];
 
     function getURL(url, loadedFunction) {
         var xhr = new XMLHttpRequest();
@@ -11,9 +11,9 @@
         xhr.send();
     }
 
-    function newsItems(story) {
+    function results(object) {
         // var newsArray = newsArray || [];
-        return story ? newsArray.push(story) : newsArray;
+        return object ? objArray.push(object) : objArray;
     }
 
     function guardianApi(url = "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com", articles=5) {
@@ -24,10 +24,10 @@
         getURL(url, guardianParser);
         function guardianParser() {
             for (var i = 0; i <= articles; i++) {
-                newsItems(JSON.parse(this.responseText).response.results[i]);
+                results(JSON.parse(this.responseText).response.results[i]);
             }
         }
-        return newsItems();
+        return results();
     }
 
     //////////// example - this will be in the interface file ////////////
@@ -41,7 +41,7 @@
     // }
 
     exports.getURL = getURL;
-    exports.newsItems = newsItems;
+    exports.results = results;
     exports.guardianApi = guardianApi;
 
 })(this);
