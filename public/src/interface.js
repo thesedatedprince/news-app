@@ -1,8 +1,7 @@
-var headlineArray = [];
+
 
 function updateHeadlines(){
   for (var i=0; i<headlineArray.length; i++){
-    console.log(headlineArray);
     var newsId = "<li class=note id=news-" + i + ">";
     var title = headlineArray[i].webTitle;
     var content = newsId + title + "</li>"
@@ -11,6 +10,7 @@ function updateHeadlines(){
 }
 
 function readGuardian(articles=5){
+  var headlineArray = [];
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all');
   xhr.onload = function() {
@@ -19,7 +19,8 @@ function readGuardian(articles=5){
           guardianObject = JSON.parse(xhr.responseText).response.results[i];
           headlineArray.push(guardianObject);
         }
-        updateHeadlines();
+        // updateHeadlines();
+        return headlineArray
       }
       else {
           alert('Request failed.  Returned status of ' + xhr.status);
