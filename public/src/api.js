@@ -1,16 +1,14 @@
-
 (function(exports){
 
-  getURL = function(){
+  getURL = function(loadedFunction){
     xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all');
-    xhr.onload = function(){
-      console.log(xhr);
-    };
+    xhr.open('GET', 'http://localhost:8080/sample_data.json');
+    xhr.onload = loadedFunction;
     xhr.send();
     return xhr;
 
   };
 
   exports.getURL = getURL;
+
 })(this);

@@ -2,7 +2,13 @@
 
 describe("getURL", function(){
   it("is able to connect to the server", function(){
-    var xhr = getURL();
-    expect(xhr.status).toEqual(200);
+    getURL(function(){
+      expect(this.status).toEqual(200);
+    });
+  })
+  it("contains 'UK News'", function() {
+    getURL(function(){
+      expect(this.responseText).toContain("UK news")
+    });
   })
 })
