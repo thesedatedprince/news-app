@@ -17,8 +17,7 @@ describe("getURL", function(){
 
 describe("guardianApi", function(){
   it("it is able to return a news article using API", function(){
-    guardianApi("fluff", function(){
-      expect(this).toContain("kill");
-    });
+    guardianApi("http://localhost:8080/sample_data.json");
+    expect(headlines()).toContain("Giggs and Neville skyscrapers 'threaten Manchester's heritage'");
   });
 });
