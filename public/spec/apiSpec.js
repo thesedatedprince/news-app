@@ -15,9 +15,10 @@ describe("getURL", function(){
   })
 })
 
-guardianApi("this",function(){
-  JSON.parse(this.responseText).response.results[i];
-  console.log("whatever")
-  console.log(this.responseText)
-
-})
+describe("guardianApi", function(){
+  it("it is able to return a news article using API", function(){
+    guardianApi("fluff", function(){
+      expect(this).toContain("kill");
+    });
+  });
+});
