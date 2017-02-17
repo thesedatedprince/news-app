@@ -48,7 +48,6 @@ describe("Spies", function() {
     complex = returns('complex',[{name:'hello' , result: "Bye"},{name:'notAmethod', result: "thingie"}]);
     expect(complex.hello()).toBe("Bye");
     expect(complex.notAmethod()).toBe("thingie")
-
   });
 
 });
@@ -58,16 +57,6 @@ describe("Spies", function() {
 function returnTrue(){
   return true;
 }
-
-function Complex() {
-
-}
-
-Complex.prototype.hello = function() {
-  return "Hello";
-}
-
-var complex = new Complex;
 
 function something(){
   return 1;
