@@ -12,8 +12,14 @@
     }
 
     function results(object) {
-        // var newsArray = newsArray || [];
-        return object ? objArray.push(object) : objArray;
+        var objArray = objArray || [object];
+        if (object){
+          objArray.push(object)
+        }
+        else{
+        return objArray
+      }
+
     }
 
     function guardianApi(url = "https://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all", articles=5) {
