@@ -4,14 +4,22 @@
     var tests = 0;
     var testTitles = [];
     var befores = {};
-    var assert = {};
+    var matchers = {};
     var firstArgs;
     var response;
+    var spyRegistry;
 
     function expect(firstArg) {
         firstArgs = firstArg;
-        return assert;
+        return matchers;
     }
+
+    matchers.toEqual = toEqual;
+    matchers.toBe = toEqual;
+    matchers.toNotEqual = toNotEqual;
+    matchers.toBeGreaterThan = toBeGreaterThan;
+    matchers.toBeLessThan = toBeLessThan;
+    matchers.toContain = toContain;
 
     function toEqual(secondArg) {
         var outStr = "expected " + truncate(firstArgs) + " to be equal to " + secondArg
@@ -62,7 +70,7 @@
     }
 
     function initiate() {
-        document.getElementById("title").innerHTML = "Pass = 0 Fail = 0";
+        spyRegistry = new SpyRegistry()
     }
 
     function describe(title, passFunction) {
@@ -89,22 +97,53 @@
     }
 
     function truncate(string) {
-      if(string.length > 20) {
-        return string.substring(0,20)+"...";
+        if (string.length > 20) {
+            return string.substring(0, 20) + "...";
+        } else {
+            return string;
+        }
+    }
+
+    function returns(name,result){
+      if(typeof(result)=== "object"){
+        return objReturns(name, result)
       }else{
-        return string;
+        return methodReturns(name, result)
       }
     }
+
+    function methodReturns(name, result) {
+        spyRegistry.add(name, result);
+        var spy = function() {
+            return spyRegistry.retrieve(name);
+        }
+        return spy;
+    }
+
+    function objReturns(obj, methods){
+        var spy = {}
+        methods.forEach(function(method){
+            spy[method.name] = methodReturns(obj + "." + method.name,method.result)
+        })
+        return spy
+    }
+
+
+    function SpyRegistry(){this._registry = {}}
+
+    SpyRegistry.prototype.add = function(name, result) {
+        this._registry[name] = result;
+    };
+
+    SpyRegistry.prototype.retrieve = function(name, result) {
+        return this._registry[name];
+    };
 
     initiate();
 
     exports.expect = expect;
+    exports.returns = returns;
 
-    assert.toEqual = toEqual;
-    assert.toNotEqual = toNotEqual;
-    assert.toBeGreaterThan = toBeGreaterThan;
-    assert.toBeLessThan = toBeLessThan;
-    assert.toContain = toContain;
 
     exports.beforeEach = beforeEach;
     exports.beforeEachCaller = beforeEachCaller;

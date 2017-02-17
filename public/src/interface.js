@@ -7,10 +7,12 @@
   function ApiInterface() {
     this.headlineArray = [];
     this.contentArray = [];
+    this.guardianUrl = "https://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all";
+    this.aylienUrl = "https://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=";
   }
 
   ApiInterface.prototype.getHeadlines = function() {
-    this.headlineArray = guardianApi();
+    this.headlineArray = guardianApi(this.guardianUrl);
   };
 
   ApiInterface.prototype.updateHeadlines = function() {
@@ -44,8 +46,8 @@
      var self = this;
        document.getElementById(news[i].id).addEventListener('click', function(event) {
             var elem = document.getElementById('news_summary');
-            var aylienUrl = "https://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + self.headlineArray[i].webUrl;
-            elem.innerHTML = self.createSummary(aylienApi(aylienUrl));
+            var fullAylienUrl = self.aylienUrl + self.headlineArray[i].webUrl;
+            elem.innerHTML = self.createSummary(aylienApi(fullAylienUrl));
        }, false);
    };
    
