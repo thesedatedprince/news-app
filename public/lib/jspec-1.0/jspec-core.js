@@ -105,7 +105,15 @@
         }
     }
 
-    function returns(name, result) {
+    function returns(name,result){
+      if(typeof(result)=== "object"){
+        return objReturns(name, result)
+      }else{
+        return methodReturns(name, result)
+      }
+    }
+
+    function methodReturns(name, result) {
         spyRegistry.add(name, result);
         var spy = function() {
             return spyRegistry.retrieve(name);
@@ -113,9 +121,16 @@
         return spy;
     }
 
-    function SpyRegistry() {
-        this._registry = {};
+    function objReturns(obj, methods){
+        var spy = {}
+        methods.forEach(function(method){
+            spy[method.name] = methodReturns(obj + "." + method.name,method.result)
+        })
+        return spy
     }
+
+
+    function SpyRegistry(){this._registry = {}}
 
     SpyRegistry.prototype.add = function(name, result) {
         this._registry[name] = result;
