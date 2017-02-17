@@ -16,7 +16,7 @@
         return object ? objArray.push(object) : objArray;
     }
 
-    function guardianApi(url = "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com", articles=5) {
+    function guardianApi(url = "https://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all", articles=5) {
         // var shellURL = "http://news-summary-api.herokuapp.com/guardian";
         // var guardianURL = "?apiRequestUrl=http://content.guardianapis.com";
         // var generatedURL = shellURL + guardianURL

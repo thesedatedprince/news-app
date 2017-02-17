@@ -22,6 +22,6 @@ describe("guardianApi", function(){
   it("it is able to return a news article using API", function(){
     guardianApi(url);
     // this is a messy test and needs refactoring
-    expect(results()[3].webTitle).toContain("Giggs and Neville skyscrapers 'threaten Manchester's heritage'");
+    expect(results()[3].webTitle).toContain("Sulphuric acid");
   });
 });

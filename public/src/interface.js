@@ -2,9 +2,7 @@ var headlineArray = [];
 var contentArray = [];
 
 function getHeadlines(){
-  guardianApi;
-
-  console.log(results());
+  headlineArray = guardianApi();
 }
 
 function updateHeadlines(){
@@ -12,7 +10,7 @@ function updateHeadlines(){
     {
       var newsId = "<li class=note id=news-" + i + ">";
       var title = headlineArray[i].webTitle;
-      writeHeadline(newsId, title)
+      writeHeadline(newsId, title);
     }
   }
 }
@@ -20,7 +18,7 @@ function updateHeadlines(){
 function writeHeadline(newsId, title){
   content = newsId + title + "</li>"
   contentArray.push(content);
-  console.log(contentArray)
+  console.log(contentArray);
   return content;
 }
 
@@ -51,4 +49,5 @@ function createHeadlines(){
 // }
 
 getHeadlines();
+updateHeadlines();
 createHeadlines();
