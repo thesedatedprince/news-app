@@ -32,25 +32,18 @@
     }
 
 
-    // function alyienApi(url = 'http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url='){
-    //     getURL(url, guardianParser);
-    //     function guardianParser() {
-    //             results(JSON.parse(this.responseText).response.results[i]);
-    //         }
-    // }
-
-    //////////// example - this will be in the interface file ////////////
-    // function updateHeadlines() {
-    //     var stories = guardianApi("http://localhost:8080/sample_data.json");
-    //     for (var i = 0; i < stories.length; i++) {
-    //         var newsId = "<li class=note id=news-" + i + ">";
-    //         var title = stories[i].webTitle;
-    //         writeHeadline(newsId, title)
-    //     }
-    // }
+    function aylienApi(url){
+        getURL(url, aylienParser);
+        var obj;
+        function aylienParser() {
+                obj = JSON.parse(this.responseText);
+            }
+        return obj;
+    }
 
     exports.getURL = getURL;
     exports.results = results;
     exports.guardianApi = guardianApi;
+    exports.aylienApi = aylienApi;
 
 })(this);
