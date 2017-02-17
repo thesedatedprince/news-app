@@ -26,8 +26,8 @@ describe("guardianApi", function(){
   });
 });
 
-// describe("aylienApi", function() {
-//     var url = testUrl();
-//     console.log(aylienApi(url))
-//     // it("")
-// })
+describe("aylienApi", function() {
+    var url = testUrl();
+    console.log(aylienApi(url))
+    // it("")
+})
