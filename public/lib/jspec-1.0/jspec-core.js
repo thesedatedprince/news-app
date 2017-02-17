@@ -14,31 +14,31 @@
     }
 
     function toEqual(secondArg) {
-        var outStr = "expected " + firstArgs + " to be equal to " + secondArg
+        var outStr = "expected " + truncate(firstArgs) + " to be equal to " + secondArg
         var result = firstArgs === secondArg;
         output(result, outStr);
     }
 
     function toNotEqual(secondArg) {
-        var outStr = "expected " + firstArgs + " not to be equal to " + secondArg;
+        var outStr = "expected " + truncate(firstArgs) + " not to be equal to " + secondArg;
         var result = firstArgs !== secondArg
         output(result, outStr);
     }
 
     function toBeGreaterThan(secondArg) {
-        var outStr = "expected " + firstArgs + " to be greater than " + secondArg;
+        var outStr = "expected " + truncate(firstArgs) + " to be greater than " + secondArg;
         var result = firstArgs > secondArg
         output(result, outStr);
     }
 
     function toBeLessThan(secondArg) {
-        var outStr = "expected " + firstArgs + " to be less than " + secondArg;
+        var outStr = "expected " + truncate(firstArgs) + " to be less than " + secondArg;
         var result = firstArgs < secondArg
         output(result, outStr);
     }
 
     function toContain(secondArg) {
-        var outStr = "expected " + firstArgs + " to contain " + secondArg;
+        var outStr = "expected " + truncate(firstArgs) + " to contain " + secondArg;
         var result = firstArgs.includes(secondArg)
         output(result, outStr);
     }
@@ -86,6 +86,14 @@
 
     function clearBefores() {
         befores = {};
+    }
+
+    function truncate(string) {
+      if(string.length > 20) {
+        return string.substring(0,20)+"...";
+      }else{
+        return string;
+      }
     }
 
     initiate();
