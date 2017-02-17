@@ -107,14 +107,10 @@
 
     function returns(name, result) {
         spyRegistry.add(name, result);
-        // var spy = retrieve(name);
-        // var spy = function() {
-        //     console.log(arguments.callee);
-        //     // console.log(this.methodNames);
-        //     //find spy in registry/array
-        //     //return result stored in araray
-        // }
-        return spyRegistry.retrieve(name);
+        var spy = function() {
+            return spyRegistry.retrieve(name);
+        }
+        return spy;
     }
 
     function SpyRegistry() {

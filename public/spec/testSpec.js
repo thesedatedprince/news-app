@@ -20,25 +20,50 @@ describe("Test suite 1", function() {
     expect("Yes").toContain("e");
   });
 
-});
-
-describe("Test suite 2", function() {
-
-  it('Equal', function(){
-    console.log("before")
-    console.log(returnTrue)
-    returnTrue = returns("returnTrue", false)
-    console.log("after")
-    console.log(returnTrue)
-    expect(returnTrue()).toBe(false);
-  });
-
   it('array contains element bean', function(){
     expect([1,2]).toContain(1);
   });
 
 });
 
+describe("Spies", function() {
+
+  it('spies', function(){
+
+    expect(returnTrue()).toBe(true); // currently true - will pass
+    expect(returnTrue()).toBe(false); // currently true - will fail
+    returnTrue = returns("returnTrue", false) // change the return value of returnTrue() to false
+    expect(returnTrue()).toBe(false); // now we have set the spy, currently true - will pass
+
+    expect(something()).toBe(1); // currently 1 - will pass
+    expect(something()).toBe(0); // currently 0 - will fail
+    something = returns("something", 0); // change the return value of something() to 0
+    expect(something()).toBe(0); // now we have set the spy, currently 0 - will pass
+
+    expect(complex.hello()).toBe("Hello");
+    complex = returns("complex", "Bye", {hello: "Bye"} );
+    expect(complex.hello()).toBe("Bye");
+
+  });
+
+});
+
+// examples for spies
+
 function returnTrue(){
-  return true
+  return true;
+}
+
+function Complex() {
+
+}
+
+Complex.prototype.hello = function() {
+  return "Hello";
+}
+
+var complex = new Complex;
+
+function something(){
+  return 1;
 }
