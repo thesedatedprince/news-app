@@ -41,9 +41,16 @@
    };
 
    ApiInterface.prototype.newsClick =  function(news,i) {
+     var self = this;
        document.getElementById(news[i].id).addEventListener('click', function(event) {
-          //  var elem = document.getElementById('currentnote');
-          //  elem.innerHTML = list.notes[i].content;
+
+            var elem = document.getElementById('news_summary');
+            var alyien = "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + self.headlineArray[i].webUrl;
+            
+            console.log(alyien)
+
+
+            elem.innerHTML = contentArray[i].body;
           //  fadeIn('current-note-container');
           //  editNote(list.notes[i], notes[i].id);
           console.log("CLICKED ME")

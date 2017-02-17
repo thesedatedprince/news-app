@@ -16,6 +16,7 @@
         return object ? objArray.push(object) : objArray;
     }
 
+
     function guardianApi(url = "https://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/uk-news?show-fields=body&show-blocks=all", articles=5) {
         // var shellURL = "http://news-summary-api.herokuapp.com/guardian";
         // var guardianURL = "?apiRequestUrl=http://content.guardianapis.com";
@@ -29,6 +30,14 @@
         }
         return results();
     }
+
+
+    // function alyienApi(url = 'http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url='){
+    //     getURL(url, guardianParser);
+    //     function guardianParser() {
+    //             results(JSON.parse(this.responseText).response.results[i]);
+    //         }
+    // }
 
     //////////// example - this will be in the interface file ////////////
     // function updateHeadlines() {
