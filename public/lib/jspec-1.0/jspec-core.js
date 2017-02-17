@@ -7,11 +7,13 @@
     var matchers = {};
     var firstArgs;
     var response;
+    var spyRegistry;
 
     function expect(firstArg) {
         firstArgs = firstArg;
         return matchers;
     }
+
     matchers.toEqual = toEqual;
     matchers.toBe = toEqual;
     matchers.toNotEqual = toNotEqual;
@@ -68,7 +70,7 @@
     }
 
     function initiate() {
-        document.getElementById("title").innerHTML = "Pass = 0 Fail = 0";
+        spyRegistry = new SpyRegistry()
     }
 
     function describe(title, passFunction) {
@@ -95,20 +97,37 @@
     }
 
     function truncate(string) {
-      if(string.length > 20) {
-        return string.substring(0,20)+"...";
-      }else{
         return string;
-      }
+        if (string.length > 20) {
+            return string.substring(0, 20) + "...";
+        } else {
+            return string;
+        }
     }
 
-    function returns(result){
-      var spy = function(){
-        //find spy in registry/array
-        //return result stored in araray
-      }
-      return  spy
+    function returns(name, result) {
+        spyRegistry.add(name, result);
+        // var spy = retrieve(name);
+        // var spy = function() {
+        //     console.log(arguments.callee);
+        //     // console.log(this.methodNames);
+        //     //find spy in registry/array
+        //     //return result stored in araray
+        // }
+        return spyRegistry.retrieve(name);
     }
+
+    function SpyRegistry() {
+        this._registry = {};
+    }
+
+    SpyRegistry.prototype.add = function(name, result) {
+        this._registry[name] = result;
+    };
+
+    SpyRegistry.prototype.retrieve = function(name, result) {
+        return this._registry[name];
+    };
 
     initiate();
 

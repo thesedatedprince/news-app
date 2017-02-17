@@ -27,10 +27,10 @@ describe("Test suite 2", function() {
   it('Equal', function(){
     console.log("before")
     console.log(returnTrue)
-    returnTrue = returns(false)
+    returnTrue = returns("returnTrue", false)
     console.log("after")
     console.log(returnTrue)
-    expect(returnTrue()).toBe(true);
+    expect(returnTrue()).toBe(false);
   });
 
   it('array contains element bean', function(){
