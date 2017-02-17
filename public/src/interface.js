@@ -1,4 +1,5 @@
 var headlineArray = [];
+var contentArray = [];
 
 function updateHeadlines(){
   for (var i=0; i<headlineArray.length; i++){
@@ -12,17 +13,16 @@ function updateHeadlines(){
 
 function writeHeadline(newsId, title){
   content = newsId + title + "</li>"
-  createHeadlines(content, scriptCaller(element));
+  contentArray.push(content);
+  console.log(contentArray)
   return content;
 }
 
-function scriptCaller(element){
-  return element;
-}
 
-function createHeadlines(content, target=scriptCaller(element)){
-   console.log(document.getElementById(target))
-     document.getElementById(target).innerHTML += content;
+function createHeadlines(){
+    for (var i=0; i<contentArray.length; i++){
+      document.getElementById('headlines').innerHTML += contentArray[i];
+    }
  }
 
 function readGuardian(articles=5){
@@ -36,7 +36,6 @@ function readGuardian(articles=5){
           headlineArray.push(guardianObject);
         }
         updateHeadlines();
-      //  return headlineArray
       }
       else {
           alert('Request failed.  Returned status of ' + xhr.status);
@@ -44,3 +43,6 @@ function readGuardian(articles=5){
   };
   xhr.send();
 }
+
+readGuardian();
+createHeadlines();
