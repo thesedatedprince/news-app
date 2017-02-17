@@ -4,14 +4,20 @@
     var tests = 0;
     var testTitles = [];
     var befores = {};
-    var assert = {};
+    var matchers = {};
     var firstArgs;
     var response;
 
     function expect(firstArg) {
         firstArgs = firstArg;
-        return assert;
+        return matchers;
     }
+    matchers.toEqual = toEqual;
+    matchers.toBe = toEqual;
+    matchers.toNotEqual = toNotEqual;
+    matchers.toBeGreaterThan = toBeGreaterThan;
+    matchers.toBeLessThan = toBeLessThan;
+    matchers.toContain = toContain;
 
     function toEqual(secondArg) {
         var outStr = "expected " + truncate(firstArgs) + " to be equal to " + secondArg
@@ -96,15 +102,19 @@
       }
     }
 
+    function returns(result){
+      var spy = function(){
+        //find spy in registry/array
+        //return result stored in araray
+      }
+      return  spy
+    }
+
     initiate();
 
     exports.expect = expect;
+    exports.returns = returns;
 
-    assert.toEqual = toEqual;
-    assert.toNotEqual = toNotEqual;
-    assert.toBeGreaterThan = toBeGreaterThan;
-    assert.toBeLessThan = toBeLessThan;
-    assert.toContain = toContain;
 
     exports.beforeEach = beforeEach;
     exports.beforeEachCaller = beforeEachCaller;
