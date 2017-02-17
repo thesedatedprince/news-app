@@ -113,9 +113,15 @@
         return spy;
     }
 
-    function SpyRegistry() {
-        this._registry = {};
+    function objReturns(obj, methods){
+        var spy = {}
+        methods.forEach(function(method){
+            spy[method.name] = returns(obj + "." + method.name,method.result)
+            console.log(method)
+        })
+        return spy
     }
+    function SpyRegistry(){this._registry = {}}
 
     SpyRegistry.prototype.add = function(name, result) {
         this._registry[name] = result;
@@ -129,6 +135,7 @@
 
     exports.expect = expect;
     exports.returns = returns;
+    exports.objReturns = objReturns;
 
 
     exports.beforeEach = beforeEach;

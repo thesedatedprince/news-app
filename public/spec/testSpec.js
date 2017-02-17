@@ -40,10 +40,18 @@ describe("Spies", function() {
     something = returns("something", 0); // change the return value of something() to 0
     expect(something()).toBe(0); // now we have set the spy, currently 0 - will pass
 
-    expect(complex.hello()).toBe("Hello");
-    complex = returns("complex", "Bye", {hello: "Bye"} );
-    expect(complex.hello()).toBe("Bye");
+    function Complex() {}
 
+    Complex.prototype.hello = function() {
+      return "Hello";
+    }
+
+    var complex = new Complex;
+
+    expect(complex.hello()).toBe("Hello");
+    complex = objReturns('complex',[{name:'hello' , result: "Bye"},{name:'notAmethod', result: "thingie"}]);
+    expect(complex.hello()).toBe("Bye");
+    expect(complex.notAmethod()).toBe("thingie")
   });
 
 });
