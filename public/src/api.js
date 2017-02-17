@@ -23,7 +23,7 @@
         var generatedURL = "http://localhost:8080/sample_data.json";
         getURL(url, guardianParser);
         function guardianParser() {
-            for (var i = 0; i <= articles; i++) {
+            for (var i = 0; i < articles; i++) {
                 results(JSON.parse(this.responseText).response.results[i]);
             }
         }
