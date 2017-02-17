@@ -22,6 +22,13 @@ describe("guardianApi", function(){
   it("it is able to return a news article using API", function(){
     guardianApi(url);
     // this is a messy test and needs refactoring
-    expect(results()[4].webTitle).toContain("Sulphuric acid");
+    expect(results()[4].webTitle).toContain("Met presses undercov");
   });
 });
+
+// Ran out of time :(
+// describe("aylienApi", function() {
+//     var url = testUrl();
+//     console.log(aylienApi(url))
+//     // it("")
+// })
