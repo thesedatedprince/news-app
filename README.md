@@ -59,7 +59,7 @@ To make my news reading more fun
 ```
 
 ## <a name="Install">Installation</a>
-To use the notes app and install node http server, follow these instructions:
+To use the news app and install node http server, follow these instructions:
 
 ```
 $ git clone https://github.com/thesedatedprince/news-app
