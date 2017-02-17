@@ -19,4 +19,8 @@ describe("Guardian", function() {
     var title = "test title";
     expect(apiInterface.writeHeadline(newsId, title)).toContain("test title");
   });
+
+  it("extracts an image URL from an article", function() {
+    expect(apiInterface.extractor("thumbnail")[0]).toContain(".jpg");
+  });
 });

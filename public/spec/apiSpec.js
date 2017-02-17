@@ -17,11 +17,19 @@ describe("getURL", function(){
 });
 
 describe("guardianApi", function(){
-  var url = testUrl();
+
+  var url;
+
+  beforeEach(function() {
+    url = testUrl();
+    guardianApi(url);
+  });
 
   it("it is able to return a news article using API", function(){
-    guardianApi(url);
-    // this is a messy test and needs refactoring
-    expect(results()[4].webTitle).toContain("Sulphuric acid");
+    expect(results()[4].webTitle).toContain("twitter");
   });
+
+  it("gets an image URL with each story", function() {
+    expect(results()[4].fields.thumbnail).toContain(".jpg")
+  })
 });
